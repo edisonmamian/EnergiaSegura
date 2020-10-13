@@ -1,7 +1,7 @@
-/SistemaInformacion/__pycache__/*.pyc
-/Apps/Usuarios/migrations/__pycache__*.pyc
-/Apps/Usuarios/migrations/*.pyc
-/Apps/Usuarios/__pycache__/*.pyc
-/Apps/TiposCilindros/migrations/__pycache__*.pyc
-/Apps/TiposCilindros/migrations/*.pyc
-/Apps/TiposCilindros/__pycache__/*.pyc
+SistemaInformacion/__pycache__/*.pyc
+Apps/Usuarios/migrations/__pycache__/*.pyc
+Apps/Usuarios/migrations/*.pyc
+Apps/Usuarios/__pycache__/*.pyc
+Apps/TiposCilindros/migrations/__pycache__/*.pyc
+Apps/TiposCilindros/migrations/*.pyc
+Apps/TiposCilindros/__pycache__/*.pyc
