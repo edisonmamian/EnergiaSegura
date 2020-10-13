@@ -1,3 +1,4 @@
 /SistemaInformacion/__pycache__/*.pyc
-/Apps/Usuarios/__pycache__/*.pyc
+/Apps/Usuarios/migrations/__pycache__*.pyc
 /Apps/Usuarios/migrations/*.pyc
+/Apps/Usuarios/__pycache__/*.pyc
