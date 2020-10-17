@@ -2,6 +2,8 @@ from django.urls import path
 
 from Apps.Usuarios.views import *
 
+app_name = 'Usuarios'
 urlpatterns = [
-    path ('index/', Ejemplo.as_view())
+    path ('roles/crear/', CrearRol.as_view(), name = 'crear_rol'),
+    path ('roles/editar/(?P<pk>\d+)/', ActualizarRol.as_view(), name = 'editar_rol')
 ]

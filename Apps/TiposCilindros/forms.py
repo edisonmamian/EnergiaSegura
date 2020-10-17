@@ -61,8 +61,6 @@ class FormEditarTiposCilindros (forms.ModelForm):
 
     def clean (self):
         form_data = super(FormEditarTiposCilindros, self).clean()
-
-        print (self)
         try:
             tipoCilindro = TiposCilindros.objects.exclude(nombre=form_data['nombre']).get(nombre=form_data['nombre'])
             self.errors['nombre'] = ["El tipo de cilindro ya existe"]

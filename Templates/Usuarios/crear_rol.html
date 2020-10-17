@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo %}
-  {{ boton }} Tipos de Cilindros
+  {{ boton }} Rol
 {% endblock %}
 
 {% block extrahead %}
@@ -29,7 +29,7 @@
 
       <div class="ibox float-e-margins">
           <div class="ibox-title">
-              <h5>Listado de Tipos de cilindros</h5>
+              <h5>Listado de Roles</h5>
               <div class="ibox-tools">
                   <a class="collapse-link">
                       <i class="fa fa-chevron-up"></i>
@@ -62,7 +62,7 @@
                                       {{ tipo.estado }}
                                   </td>
                                   <td>
-                                      <a href="{% url 'TiposCilindros:editar' tipo.id %}" class="btn btn-primary"> Editar </a>
+                                      <a href="{% url 'Usuarios:editar_rol' tipo.id %}" class="btn btn-primary"> Editar </a>
                                   </td>
                               </tr>
                           {% endfor %}
