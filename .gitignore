@@ -5,3 +5,6 @@ Apps/Usuarios/__pycache__/*.pyc
 Apps/TiposCilindros/migrations/__pycache__/*.pyc
 Apps/TiposCilindros/migrations/*.pyc
 Apps/TiposCilindros/__pycache__/*.pyc
+Apps/AnalisisLaboratorio/migrations/__pycache__/*.pyc
+Apps/AnalisisLaboratorio/migrations/*.pyc
+Apps/AnalisisLaboratorio/__pycache__/*.pyc
