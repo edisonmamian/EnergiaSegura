@@ -61,3 +61,34 @@ class ActualizarRol (UpdateView):
         context['boton']= "Actualizar"
         context['tipos']= Roles.objects.all()
         return context
+
+class CrearUsuario (CreateView):
+    model = Usuario
+    template_name = "Usuarios/crear.html"
+    form_class = FormCrearUsuario
+
+    def get_success_url(self):
+        return reverse("Usuarios:crear")
+
+    def form_valid (self, form):
+        messages.success (
+            self.request,
+            "Se ha registrado exitosamente el usuario"
+        )
+        return super(CrearUsuario, self).form_valid(form)
+
+    def form_invalid (self, form):
+        messages.error (
+            self.request,
+            "Error al registrar el usuario, por favor revise los datos"
+        )
+        return super(CrearUsuario, self).form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearUsuario, self).get_context_data(**kwargs)
+        context['boton']= "Registrar"
+        return context
+
+class ListarUsuario (ListView):
+    model = Usuario
+    template_name = "Usuarios/listar.html"
