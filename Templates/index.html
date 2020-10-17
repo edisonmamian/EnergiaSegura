@@ -82,16 +82,8 @@
             </nav>
         </div>
         <div class="row  border-bottom white-bg dashboard-header">
-
-            <div class="col-md-3">
-
-            </div>
-            <div class="col-md-6">
-
-            </div>
-            <div class="col-md-3">
-
-            </div>
+          {% block contenido %}
+      	  {% endblock%}
       </div>
 
     <div class="footer">
@@ -137,6 +129,24 @@
     <!-- Toastr -->
     <script src="{% static 'js/plugins/toastr/toastr.min.js' %}"></script>
 
+
+    <script type="text/javascript">
+        {% for msg in messages %}
+            $(document).ready(function(){
+                setTimeout(function() {
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                        "showEasing": "swing"
+                    }
+                    toastr["{{ msg.tags }}"]("{{msg}}")
+                },500);
+            });
+        {% endfor %}
+
+        //inhabilita el autocompletar de los formularios
+         $('form').attr('autocomplete','off');
+    </script>
     {% block scripts %}
 	  {% endblock%}
 
