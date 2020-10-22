@@ -6,10 +6,13 @@
       <span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level collapse">
-        <li><a href="#"> Crear </a></li>
+        <li><a href="{% url 'Usuarios:crear_rol' %}"> Roles </a></li>
     </ul>
     <ul class="nav nav-second-level collapse">
-        <li><a href="#"> Listar </a></li>
+        <li><a href="{% url 'Usuarios:crear' %}"> Crear Usuarios </a></li>
+    </ul>
+    <ul class="nav nav-second-level collapse">
+        <li><a href="{% url 'Usuarios:listar' %}"> Listar Usuarios </a></li>
     </ul>
 </li>
 

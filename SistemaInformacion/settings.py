@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Apps.Usuarios',
     'Apps.TiposCilindros',
+    'Apps.AnalisisLaboratorio',
 ]
 
 MIDDLEWARE = [
