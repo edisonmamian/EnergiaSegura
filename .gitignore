@@ -1,3 +1,4 @@
+db.sqlite3
 SistemaInformacion/__pycache__/*.pyc
 Apps/Usuarios/migrations/__pycache__/*.pyc
 Apps/Usuarios/migrations/*.pyc
