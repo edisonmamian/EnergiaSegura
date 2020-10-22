@@ -30,7 +30,7 @@ class FormCrearTiposCilindros (forms.ModelForm):
 
         try:
             tipoCilindro = TiposCilindros.objects.get(nombre=form_data['nombre'])
-            self.errors['nombre'] = ["El tipo de cilindro ya existe"]
+            self._errors['nombre'] = ["El tipo de cilindro ya existe"]
         except TiposCilindros.DoesNotExist:
             pass
 
@@ -61,8 +61,10 @@ class FormEditarTiposCilindros (forms.ModelForm):
 
     def clean (self):
         form_data = super(FormEditarTiposCilindros, self).clean()
+        print (self.instance)
         try:
-            tipoCilindro = TiposCilindros.objects.exclude(nombre=self.instance.id).get(nombre=form_data['nombre'])
-            self.errors['nombre'] = ["El tipo de cilindro ya existe"]
+            tipoCilindro = TiposCilindros.objects.exclude(nombre=self.instance)
+            tipoCilindro = tipoCilindro.get(nombre=form_data['nombre'])
+            self._errors['nombre'] = ["El tipo de cilindro ya existe"]
         except TiposCilindros.DoesNotExist:
             pass

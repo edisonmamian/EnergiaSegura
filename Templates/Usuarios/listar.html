@@ -64,7 +64,16 @@
                           <td> {{ usuario.telefono }} </td>
                           <td> {{ usuario.username }} </td>
                           <td> {{ usuario.rol }} </td>
-                          <td> {{ usuario.is_active }} </td>
+                          <td>
+                            {% if usuario.is_active %}
+                              Activo
+                            {% else %}
+                              Inactivo
+                            {% endif %}
+                          </td>
+                          <td>
+                            <a href="{% url 'Usuarios:editar' usuario.id %}" class="btn btn-primary"> Editar </a>
+                          </td>
                         {% endfor %}
                       </tr>
                     </tbody>

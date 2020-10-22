@@ -68,7 +68,7 @@ class CrearUsuario (CreateView):
     form_class = FormCrearUsuario
 
     def get_success_url(self):
-        return reverse("Usuarios:crear")
+        return reverse("Usuarios:listar")
 
     def form_valid (self, form):
         messages.success (
@@ -92,3 +92,30 @@ class CrearUsuario (CreateView):
 class ListarUsuario (ListView):
     model = Usuario
     template_name = "Usuarios/listar.html"
+
+class ActualizarUsuario (UpdateView):
+    model = Usuario
+    template_name = "Usuarios/crear.html"
+    form_class = FormActualizarUsuario
+
+    def get_success_url(self):
+        return reverse("Usuarios:listar")
+
+    def form_valid (self, form):
+        messages.success (
+            self.request,
+            "Se ha actualizado exitosamente el usuario"
+        )
+        return super(ActualizarUsuario, self).form_valid(form)
+
+    def form_invalid (self, form):
+        messages.error (
+            self.request,
+            "Error al actualizar el usuario, por favor revise los datos"
+        )
+        return super(ActualizarUsuario, self).form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(ActualizarUsuario, self).get_context_data(**kwargs)
+        context['boton']= "Actualizar"
+        return context

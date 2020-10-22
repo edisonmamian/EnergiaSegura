@@ -8,4 +8,5 @@ urlpatterns = [
     path ('roles/editar/(?P<pk>\d+)/', ActualizarRol.as_view(), name = 'editar_rol'),
     path ('crear/', CrearUsuario.as_view(), name = 'crear'),
     path ('listar/', ListarUsuario.as_view(), name = 'listar'),
+    path ('editar/(?P<pk>\d+)/', ActualizarUsuario.as_view(), name = 'editar'),
 ]
