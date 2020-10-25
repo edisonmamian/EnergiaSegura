@@ -61,7 +61,6 @@ class FormEditarTiposCilindros (forms.ModelForm):
 
     def clean (self):
         form_data = super(FormEditarTiposCilindros, self).clean()
-        print (self.instance)
         try:
             tipoCilindro = TiposCilindros.objects.exclude(nombre=self.instance)
             tipoCilindro = tipoCilindro.get(nombre=form_data['nombre'])

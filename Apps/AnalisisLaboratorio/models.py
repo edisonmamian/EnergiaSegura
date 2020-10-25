@@ -17,16 +17,18 @@ class Fases (models.Model):
         choices=ESTADOS,
         verbose_name='Estado'
     )
-    orden = models.IntegerField(
-        validators=[MinValueValidator(0)],
-        null=False,
-        verbose_name='Orden'
+    fases_previas = models.ManyToManyField(
+        'self',
+        related_name='previa',
+        verbose_name='Fases previas',
+        limit_choices_to={'estado': 'Activo'},
+        symmetrical=False,
+        blank=True
     )
 
     class Meta:
         verbose_name = "Fases"
         ordering = ['nombre', 'estado']
-        unique_together = (("estado", "orden"),)
 
     def __str__(self):
         return self.nombre
