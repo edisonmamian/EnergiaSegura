@@ -1,4 +1,5 @@
 from django import forms
+from django_select2.forms import ModelSelect2MultipleWidget
 from .models import *
 
 class FormCrearFases (forms.ModelForm):
@@ -10,12 +11,20 @@ class FormCrearFases (forms.ModelForm):
             'estado'
         ]
 
+        widgets = {
+            'fases_previas' : ModelSelect2MultipleWidget (
+                model = Fases,
+                search_fields = ['nombre__icontains'],
+                attrs = {
+					'class': 'select2_demo_2 form-control',
+                    'multiple': 'multiple'
+				}
+            )
+        }
+
     def __init__(self, *args, **kwargs):
         super(FormCrearFases, self).__init__(*args, **kwargs)
         self.fields['nombre'].widget.attrs = {
-            'class': 'form-control'
-        }
-        self.fields['fases_previas'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['estado'].widget.attrs = {
@@ -40,14 +49,21 @@ class FormEditarFases (forms.ModelForm):
             'estado'
         ]
 
+        widgets = {
+            'fases_previas' : ModelSelect2MultipleWidget (
+                model = Fases,
+                search_fields = ['nombre__icontains'],
+                attrs = {
+					'class': 'select2_demo_2 form-control',
+                    'multiple': 'multiple'
+				}
+            )
+        }
+
     def __init__(self, *args, **kwargs):
         super(FormEditarFases, self).__init__(*args, **kwargs)
         self.fields['nombre'].widget.attrs = {
             'class': 'form-control'
-        }
-        self.fields['fases_previas'].widget.attrs = {
-            'class': 'select2 form-control',
-            'multiple': 'multiple'
         }
         self.fields['estado'].widget.attrs = {
             'class': 'form-control',
