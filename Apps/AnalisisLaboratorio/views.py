@@ -51,7 +51,7 @@ class EditarFase (UpdateView):
     def form_invalid (self, form):
         messages.error (
             self.request,
-            "Error al registrar la fase, por favor revise los datos"
+            "Error al editar la fase, por favor revise los datos"
         )
         return super(EditarFase, self).form_invalid(form)
 
@@ -59,4 +59,60 @@ class EditarFase (UpdateView):
         context = super(EditarFase, self).get_context_data(**kwargs)
         context['boton']= "Editar"
         context['fases']= Fases.objects.all()
+        return context
+
+class CrearAnalisis (CreateView):
+    model = Analisis
+    template_name = "AnalisisLaboratorio/analisis.html"
+    form_class = FormCrearAnalisis
+
+    def get_success_url(self):
+        return reverse("AnalisisLaboratorio:crear")
+
+    def form_valid (self, form):
+        messages.success (
+            self.request,
+            "Se ha registrado exitosamente el análisis de laboratorio"
+        )
+        return super(CrearAnalisis, self).form_valid(form)
+
+    def form_invalid (self, form):
+        messages.error (
+            self.request,
+            "Error al editar el análisis de laboratorio, por favor revise los datos"
+        )
+        return super(CrearAnalisis, self).form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearAnalisis, self).get_context_data(**kwargs)
+        context['boton']= "Crear"
+        context['analisis']= Analisis.objects.all()
+        return context
+
+class EditarAnalisis (UpdateView):
+    model = Analisis
+    template_name = "AnalisisLaboratorio/analisis.html"
+    form_class = FormEditarAnalisis
+
+    def get_success_url(self):
+        return reverse("AnalisisLaboratorio:crear")
+
+    def form_valid (self, form):
+        messages.success (
+            self.request,
+            "Se ha registrado exitosamente el análisis de laboratorio"
+        )
+        return super(EditarAnalisis, self).form_valid(form)
+
+    def form_invalid (self, form):
+        messages.error (
+            self.request,
+            "Error al editar el análisis de laboratorio, por favor revise los datos"
+        )
+        return super(EditarAnalisis, self).form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditarAnalisis, self).get_context_data(**kwargs)
+        context['boton']= "Editar"
+        context['analisis']= Analisis.objects.all()
         return context

@@ -51,17 +51,16 @@ class Analisis (models.Model):
     unidad_medida = models.CharField(
         max_length=20,
         null=False,
-        choices=ESTADOS,
         verbose_name='Unidad de medida'
     )
     valor_minimo = models.DecimalField(
-        max_digits=5,
+        max_digits=10,
         decimal_places=3,
         verbose_name='Valor mínimo',
         null=False
     )
     valor_maximo = models.DecimalField(
-        max_digits=5,
+        max_digits=10,
         decimal_places=3,
         verbose_name='Valor maximo',
         null=False
@@ -70,7 +69,7 @@ class Analisis (models.Model):
         Fases,
         limit_choices_to={'estado': 'Activo'},
         on_delete=models.CASCADE,
-        verbose_name="Rol"
+        verbose_name="Fase"
     )
 
     class Meta:

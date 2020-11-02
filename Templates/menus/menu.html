@@ -22,31 +22,23 @@
 <li>
     <a href="{% url 'TiposCilindros:crear' %}">
       <i class="fa fa-fire-extinguisher"></i>
-      <span class="nav-label">Tipos Cilindros</span>
-      <span class="fa arrow"></span>
+      <span class="nav-label">Tipos Cilindros </span>
     </a>
-    <ul class="nav nav-second-level collapse">
-        <li><a href="{% url 'TiposCilindros:crear' %}"> Crear </a></li>
-    </ul>
-    <ul class="nav nav-second-level collapse">
-        <li><a href="#"> Listar </a></li>
-    </ul>
 </li>
-
 <!-- Fin Tipos de Cilindros -->
 
 <!-- inicio Analisis de Laboratorio -->
 <li>
     <a href="#">
       <i class="fa fa-flask"></i>
-      <span class="nav-label">Analisis de Laboratorio</span>
+      <span class="nav-label">Análisis de Laboratorio</span>
       <span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level collapse">
         <li><a href="{% url 'AnalisisLaboratorio:fases_crear' %}"> Fases </a></li>
     </ul>
     <ul class="nav nav-second-level collapse">
-        <li><a href="#"> Listar </a></li>
+        <li><a href="{% url 'AnalisisLaboratorio:crear' %}"> Análisis </a></li>
     </ul>
 </li>
 

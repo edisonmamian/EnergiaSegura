@@ -147,8 +147,6 @@ CACHES = {
 }
 
 # Tell select2 which cache configuration to use:
-#SELECT2_CACHE_BACKEND = "default"
-#SELECT2_JS = 'static/js/plugins/select2/select2.full.min.js'
-#SELECT2_CSS = 'static/css/plugins/select2/select2-bootstrap4.min.css'
+SELECT2_CACHE_BACKEND = "default"
 SELECT2_JS = ''
-#SELECT2_CSS = ''
+SELECT2_CSS = ''
