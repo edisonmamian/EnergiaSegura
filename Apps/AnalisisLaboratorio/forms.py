@@ -104,9 +104,13 @@ class FormCrearAnalisis (forms.ModelForm):
         }
         self.fields['valor_minimo'].widget.attrs = {
             'class': 'form-control',
+            'type':'number',
+            'min':'0.00',
         }
         self.fields['valor_maximo'].widget.attrs = {
             'class': 'form-control',
+            'type':'number',
+            'min':'0.00',
         }
         self.fields['fase'].widget.attrs = {
             'class': 'form-control',
@@ -151,9 +155,13 @@ class FormEditarAnalisis (forms.ModelForm):
         }
         self.fields['valor_minimo'].widget.attrs = {
             'class': 'form-control',
+            'type':'number',
+            'min':'0.00',
         }
         self.fields['valor_maximo'].widget.attrs = {
             'class': 'form-control',
+            'type':'number',
+            'min':'0.00',
         }
         self.fields['fase'].widget.attrs = {
             'class': 'form-control',

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import CreateView, ListView, UpdateView, DetailView
 from django.contrib import messages
+from django.forms import formset_factory
 from .models import *
 from .forms import *
 
@@ -15,6 +16,20 @@ class CrearTipoCilindro (CreateView):
         return reverse("TiposCilindros:crear")
 
     def form_valid (self, form):
+        context = self.get_context_data()
+        analisis = context ['analisis']
+
+        if analisis.is_valid():
+            self.object = form.save()
+            analisis.instance = self.object
+            analisis.save()
+        else:
+            messages.error (
+                self.request,
+                "Error al registrar el tipo de cilindro, por favor revise los datos"
+            )
+            return super(CrearTipoCilindro, self).form_invalid(form)
+
         messages.success (
             self.request,
             "Se ha registrado exitosamente el Tipo de cilindro"
@@ -32,6 +47,14 @@ class CrearTipoCilindro (CreateView):
         context = super(CrearTipoCilindro, self).get_context_data(**kwargs)
         context['boton']= "Registrar"
         context['tipos']= TiposCilindros.objects.all()
+
+        if self.request.POST:
+            context['analisis'] = FormSet_TiposCilindros_Analisis (
+                self.request.POST
+            )
+        else:
+            context['analisis'] = FormSet_TiposCilindros_Analisis ()
+
         return context
 
 class ActualizarTipoCilindro (UpdateView):
@@ -43,6 +66,20 @@ class ActualizarTipoCilindro (UpdateView):
         return reverse("TiposCilindros:crear")
 
     def form_valid (self, form):
+        context = self.get_context_data()
+        analisis = context ['analisis']
+
+        if analisis.is_valid():
+            self.object = form.save()
+            analisis.instance = self.object
+            analisis.save()
+        else:
+            messages.error (
+                self.request,
+                "Error al actualizar el tipo de cilindro, por favor revise los datos"
+            )
+            return render(self.request, self.template_name, context)
+
         messages.success (
             self.request,
             "Se ha actualizado exitosamente el Tipo de cilindro"
@@ -60,4 +97,15 @@ class ActualizarTipoCilindro (UpdateView):
         context = super(ActualizarTipoCilindro, self).get_context_data(**kwargs)
         context['boton']= "Actualizar"
         context['tipos']= TiposCilindros.objects.all()
+
+        if self.request.POST:
+            context['analisis'] = FormSet_Editar_TiposCilindros_Analisis (
+                self.request.POST,
+                instance=self.object
+            )
+        else:
+            context['analisis'] = FormSet_Editar_TiposCilindros_Analisis (
+                instance=self.object
+            )
+
         return context
