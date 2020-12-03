@@ -21,5 +21,6 @@ urlpatterns = [
     path('usuarios/', include('Apps.Usuarios.urls')),
     path('tiposcilindros/', include('Apps.TiposCilindros.urls')),
     path('analisislaboratorio/', include('Apps.AnalisisLaboratorio.urls')),
+    path('clientes/', include('Apps.Clientes.urls')),
     path('select2/', include('django_select2.urls')),
 ]

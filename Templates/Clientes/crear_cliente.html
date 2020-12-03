@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block titulo %}
+  {{ boton }} Cliente
+{% endblock %}
+
+{% block extrahead %}
+
+{% endblock%}
+
+{% block contenido %}
+  <div class="col-md-12">
+      <form  method="POST" class="form-horizontal form-bordered " data-parsley-validate="true"> {% csrf_token %}
+
+  		{{ form.as_p }}
+  		<div class="form-group">
+  			<label class="control-label col-md-4 col-sm-4"></label>
+  			<div class="col-md-6 col-sm-6">
+  				<button type="submit" class="btn btn-primary add-gritter-light">
+  				{{ boton }}
+  				</button>
+  			</div>
+  		</div>
+  	</form>
+  </div>
+
+{% endblock%}
+
+{% block scripts %}
+
+{%endblock%}
