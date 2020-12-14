@@ -1,4 +1,5 @@
 from django.db import models
+from Apps.TiposCilindros.models import TiposCilindros
 
 # Create your models here.
 ESTADOS = (('Activo', 'Activo'),('Inactivo', 'Inactivo'))
@@ -43,6 +44,28 @@ class Ciudades (models.Model):
     def __str__(self):
         return self.nombre
 
+class ClasificacionClientes (models.Model):
+    nombre = models.CharField(
+        max_length=50,
+        null=False,
+        verbose_name='Nombre'
+    )
+    tipos_cilindros = models.ManyToManyField(
+        TiposCilindros,
+        verbose_name='Tipos de cilindros',
+        limit_choices_to={'estado': 'Activo'},
+        symmetrical=False,
+        blank=True
+    )
+    estado = models.CharField(
+        max_length=8,
+        null=False,
+        choices=ESTADOS,
+        verbose_name='Estado'
+    )
+
+    def __str__(self):
+        return self.nombre
 
 class Clientes (models.Model):
     nombre = models.CharField(

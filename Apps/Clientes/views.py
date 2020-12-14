@@ -55,7 +55,7 @@ class CrearClientes (CreateView):
 class EditarClientes (UpdateView):
     model = Clientes
     template_name = "Clientes/crear_cliente.html"
-    form_class = FormCrearCliente
+    form_class = FormEditarCliente
 
     def get_success_url(self):
         return reverse("Clientes:crear")
@@ -77,4 +77,62 @@ class EditarClientes (UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EditarClientes, self).get_context_data(**kwargs)
         context['boton']= "Editar"
+        return context
+
+class CrearClasificacion (CreateView):
+    model = ClasificacionClientes
+    template_name = "Clientes/clasificacion.html"
+    form_class = FormCrearClasificacion
+
+    def get_success_url(self):
+        return reverse("Clientes:clasificacion_crear")
+
+    def form_valid (self, form):
+        messages.success (
+            self.request,
+            "Se ha registrado exitosamente la clasificación de clientes"
+        )
+        return super(CrearClasificacion, self).form_valid(form)
+
+    def form_invalid (self, form):
+        messages.error (
+            self.request,
+            "Error al registrar la clasificación de clientes, por favor revise los datos"
+        )
+        return super(CrearClasificacion, self).form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearClasificacion, self).get_context_data(**kwargs)
+        clasificacion = ClasificacionClientes.objects.all()
+        context['boton']= "Registrar"
+        context['clasificaciones'] = clasificacion
+        return context
+
+class EditarClasificacion (UpdateView):
+    model = ClasificacionClientes
+    template_name = "Clientes/clasificacion.html"
+    form_class = FormCrearClasificacion
+
+    def get_success_url(self):
+        return reverse("Clientes:clasificacion_crear")
+
+    def form_valid (self, form):
+        messages.success (
+            self.request,
+            "Se ha editado exitosamente la clasificación de clientes"
+        )
+        return super(EditarClasificacion, self).form_valid(form)
+
+    def form_invalid (self, form):
+        messages.error (
+            self.request,
+            "Error al editar la clasificación de clientes, por favor revise los datos"
+        )
+        return super(EditarClasificacion, self).form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditarClasificacion, self).get_context_data(**kwargs)
+        clasificacion = ClasificacionClientes.objects.all()
+        context['boton']= "Actualizar"
+        context['clasificaciones'] = clasificacion
         return context
