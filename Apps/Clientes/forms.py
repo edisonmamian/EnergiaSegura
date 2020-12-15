@@ -11,28 +11,35 @@ class FormCrearCliente (forms.ModelForm):
             'estado',
             'tipo_identifcacion',
             'numero_identificacion',
+            'clasificacion',
             'departamento',
             'ciudad',
             'direccion',
+            'responsable_tecnico',
             'telefono_tecnico',
             'email_tecnico',
+            'responsable_comercial',
             'telefono_comercial',
             'email_comercial',
+            'responsable_contabilidad',
             'telefono_contabilidad',
             'email_contabilidad',
+            'responsable_administrativo',
             'telefono_administrativo',
             'email_administrativo',
         ]
 
         widgets = {
-            'fases_previas' : ModelSelect2MultipleWidget (
+
+
+            'clasificacion' : ModelSelect2MultipleWidget (
                 model = Clientes,
                 search_fields = ['nombre__icontains'],
                 attrs = {
-					'class': 'select2_demo_2 form-control',
+                    'class': 'select2_demo_2 form-control',
                     'multiple': 'multiple'
-				}
-            )
+                }
+            ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -58,10 +65,16 @@ class FormCrearCliente (forms.ModelForm):
         self.fields['direccion'].widget.attrs = {
             'class': 'form-control'
         }
+        self.fields['responsable_tecnico'].widget.attrs = {
+            'class': 'form-control'
+        }
         self.fields['telefono_tecnico'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['email_tecnico'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['responsable_comercial'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['telefono_comercial'].widget.attrs = {
@@ -70,10 +83,16 @@ class FormCrearCliente (forms.ModelForm):
         self.fields['email_comercial'].widget.attrs = {
             'class': 'form-control'
         }
+        self.fields['responsable_contabilidad'].widget.attrs = {
+            'class': 'form-control'
+        }
         self.fields['telefono_contabilidad'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['email_contabilidad'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['responsable_administrativo'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['telefono_administrativo'].widget.attrs = {
@@ -103,21 +122,26 @@ class FormEditarCliente (forms.ModelForm):
             'estado',
             'tipo_identifcacion',
             'numero_identificacion',
+            'clasificacion',
             'departamento',
             'ciudad',
             'direccion',
+            'responsable_tecnico',
             'telefono_tecnico',
             'email_tecnico',
+            'responsable_comercial',
             'telefono_comercial',
             'email_comercial',
+            'responsable_contabilidad',
             'telefono_contabilidad',
             'email_contabilidad',
+            'responsable_administrativo',
             'telefono_administrativo',
             'email_administrativo',
         ]
 
         widgets = {
-            'fases_previas' : ModelSelect2MultipleWidget (
+            'clasificacion' : ModelSelect2MultipleWidget (
                 model = Clientes,
                 search_fields = ['nombre__icontains'],
                 attrs = {
@@ -150,10 +174,16 @@ class FormEditarCliente (forms.ModelForm):
         self.fields['direccion'].widget.attrs = {
             'class': 'form-control'
         }
+        self.fields['responsable_tecnico'].widget.attrs = {
+            'class': 'form-control'
+        }
         self.fields['telefono_tecnico'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['email_tecnico'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['responsable_comercial'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['telefono_comercial'].widget.attrs = {
@@ -162,10 +192,16 @@ class FormEditarCliente (forms.ModelForm):
         self.fields['email_comercial'].widget.attrs = {
             'class': 'form-control'
         }
+        self.fields['responsable_contabilidad'].widget.attrs = {
+            'class': 'form-control'
+        }
         self.fields['telefono_contabilidad'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['email_contabilidad'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['responsable_administrativo'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['telefono_administrativo'].widget.attrs = {

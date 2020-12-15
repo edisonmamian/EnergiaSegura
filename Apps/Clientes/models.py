@@ -90,6 +90,11 @@ class Clientes (models.Model):
         null = False,
         verbose_name = 'Número de identificación'
     )
+    clasificacion = models.ManyToManyField(
+        ClasificacionClientes,
+        verbose_name = 'Clasificación del cliente',
+        limit_choices_to = {'estado': 'Activo'}
+    )
     departamento = models.ForeignKey(
         Departamentos,
         on_delete=models.CASCADE,
@@ -105,6 +110,12 @@ class Clientes (models.Model):
         null = False,
         verbose_name = 'Dirección'
     )
+    responsable_tecnico = models.CharField(
+        max_length = 100,
+        verbose_name = 'Nombre del responsable técnico',
+        null = True,
+        blank = True,
+    )
     telefono_tecnico = models.CharField(
         max_length = 20,
         verbose_name = 'Teléfono/celular del responsable técnico',
@@ -115,6 +126,12 @@ class Clientes (models.Model):
         verbose_name = 'Email del responsable técnico',
         null = True,
         blank = True
+    )
+    responsable_comercial = models.CharField(
+        max_length = 100,
+        verbose_name = 'Nombre del responsable comercial',
+        null = True,
+        blank = True,
     )
     telefono_comercial = models.CharField(
         max_length = 20,
@@ -127,6 +144,12 @@ class Clientes (models.Model):
         null = True,
         blank = True
     )
+    responsable_contabilidad = models.CharField(
+        max_length = 100,
+        verbose_name = 'Nombre del responsable de contabilidad',
+        null = True,
+        blank = True,
+    )
     telefono_contabilidad = models.CharField(
         max_length = 20,
         verbose_name = 'Teléfono/celular de contabilidad',
@@ -137,6 +160,12 @@ class Clientes (models.Model):
         verbose_name = 'Email de contabilidad',
         null = True,
         blank = True
+    )
+    responsable_administrativo = models.CharField(
+        max_length = 100,
+        verbose_name = 'Nombre del responsable administrativo',
+        null = True,
+        blank = True,
     )
     telefono_administrativo = models.CharField(
         max_length = 20,
