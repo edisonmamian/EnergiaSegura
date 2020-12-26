@@ -1,4 +1,5 @@
 from django import forms
+from django_select2.forms import ModelSelect2MultipleWidget
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
 
@@ -7,8 +8,22 @@ class FormCrearRoles (forms.ModelForm):
         model = Roles
         fields = [
             'nombre',
-            'estado'
+            'estado',
+            'permisos'
         ]
+
+        widgets = {
+
+
+            'permisos' : ModelSelect2MultipleWidget (
+                model = Permisos,
+                search_fields = ['nombre__icontains'],
+                attrs = {
+                    'class': 'select2_demo_2 form-control',
+                    'multiple': 'multiple'
+                }
+            ),
+        }
 
     def __init__(self, *args, **kwargs):
         super(FormCrearRoles, self).__init__(*args, **kwargs)
@@ -34,8 +49,20 @@ class FormEditarRoles (forms.ModelForm):
         model = Roles
         fields = [
             'nombre',
-            'estado'
+            'estado',
+            'permisos'
         ]
+
+        widgets = {
+            'permisos' : ModelSelect2MultipleWidget (
+                model = Permisos,
+                search_fields = ['nombre__icontains'],
+                attrs = {
+					'class': 'select2_demo_2 form-control',
+                    'multiple': 'multiple'
+				}
+            )
+        }
 
     def __init__(self, *args, **kwargs):
         super(FormEditarRoles, self).__init__(*args, **kwargs)

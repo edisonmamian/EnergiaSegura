@@ -3,6 +3,18 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 ESTADOS = (('Activo', 'Activo'),('Inactivo', 'Inactivo'))
+
+class Permisos (models.Model):
+    nombre = models.CharField(
+        max_length=50,
+        null=False,
+        unique=True,
+        verbose_name='Nombre'
+    )
+
+    def __str__(self):
+        return self.nombre
+
 class Roles (models.Model):
     nombre = models.CharField(
         max_length=50,
@@ -15,6 +27,10 @@ class Roles (models.Model):
         null=False,
         choices=ESTADOS,
         verbose_name='Estado'
+    )
+    permisos = models.ManyToManyField(
+        Permisos,
+        verbose_name='Permisos'
     )
 
     class Meta:
