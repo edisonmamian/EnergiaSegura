@@ -250,6 +250,81 @@ class FormActualizarUsuario (forms.ModelForm):
 
         return form_data
 
+class FormActualizarPerfil (forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(FormCrearUsuario, self).__init__(*args, **kwargs)
+        self.fields['first_name'].label = 'Primer nombre'
+        self.fields['last_name'].label = 'Primer apellido'
+        self.fields['username'].label = 'Usuario'
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        self.fields['username'].required = True
+
+    class Meta:
+        model = Usuario
+        fields = (
+            'first_name',
+            'segundo_nombre',
+            'last_name',
+            'segundo_apellido',
+            'tipo_documento',
+            'numero_documento',
+            'telefono',
+            'username',
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(FormActualizarPerfil, self).__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['segundo_nombre'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['last_name'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['segundo_apellido'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['tipo_documento'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['numero_documento'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['telefono'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['username'].widget.attrs = {
+            'class': 'form-control'
+        }
+
+    def clean (self):
+        form_data = super(FormActualizarPerfil, self).clean()
+
+        try:
+            documento = Usuario.objects.exclude(
+                numero_documento = self.instance.numero_documento,
+                tipo_documento = self.instance.tipo_documento
+                ).get(
+                numero_documento = form_data['numero_documento'],
+                tipo_documento = form_data['tipo_documento']
+            )
+            self._errors['numero_documento'] = ["Ya existe un usuario con el mismo número de documento"]
+        except Usuario.DoesNotExist:
+            pass
+
+        try:
+            usuario = Usuario.objects.exclude(username = self.instance.username).get(
+                username = form_data['username']
+            )
+            self._errors['username'] = ["Ya existe el usuario"]
+        except Usuario.DoesNotExist:
+            pass
+
+        return form_data
+
 class LoginForm (forms.Form):
     username = forms.CharField(
         label = 'Usuario',

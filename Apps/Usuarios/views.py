@@ -95,7 +95,7 @@ class CrearUsuario (CreateView):
 class ListarUsuario (ListView):
     model = Usuario
     template_name = "Usuarios/listar.html"
-    
+
 
 class ActualizarUsuario (UpdateView):
     model = Usuario
@@ -122,6 +122,35 @@ class ActualizarUsuario (UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ActualizarUsuario, self).get_context_data(**kwargs)
         context['boton']= "Actualizar"
+        return context
+
+class ActualizarPerfil (UpdateView):
+    model = Usuario
+    template_name = "Usuarios/crear.html"
+    form_class = FormActualizarPerfil
+
+    def get_success_url(self):
+        return reverse("Usuarios:listar")
+
+    def get_object(self):
+        usuario = Usuario.objects.get(pk=self.request.user.id)
+        return usuario
+
+    def form_valid(self, form):
+        message.success(
+            self.request,
+            "Se ha actualizado exitosamente su perfil"
+        )
+
+    def form_invalid(self, form):
+        message.error (
+            self.request,
+            "Error al actualizar su perfil, por favor revise los datos"
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super(ActualizarPerfil, self).get_context_data(**kwargs)
+        context['boton'] = "Actualizar"
         return context
 
 class LoginUsuario(FormView):
