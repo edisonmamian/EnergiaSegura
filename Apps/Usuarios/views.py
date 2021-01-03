@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, FormView
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import *
 from .forms import *
@@ -95,6 +95,7 @@ class CrearUsuario (CreateView):
 class ListarUsuario (ListView):
     model = Usuario
     template_name = "Usuarios/listar.html"
+    
 
 class ActualizarUsuario (UpdateView):
     model = Usuario
@@ -147,19 +148,6 @@ class LoginUsuario(FormView):
             )
             return HttpResponseRedirect(reverse_lazy('Usuarios:login'))
 
-    """def get_success_url(self):
-        print (self.request.user)
-        return reverse("Usuarios:listar")
-
-    def get(self, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            pass
-
-        return super(LoginUsuario, self).get(*args, **kwargs)
-
-    def form_invalid (self, form):
-        messages.error (
-            self.request,
-            "Error al autenticarse"
-        )
-        return super(LoginUsuario, self).form_invalid(form)"""
+def LogoutUsuario(request):
+    logout(request)
+    return HttpResponseRedirect(reverse_lazy('Usuarios:login'))
