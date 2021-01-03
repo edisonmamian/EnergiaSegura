@@ -166,12 +166,13 @@ class FormCrearUsuario (UserCreationForm):
 
         return form_data
 
-class FormActualizarUsuario (UserCreationForm):
+class FormActualizarUsuario (forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FormCrearUsuario, self).__init__(*args, **kwargs)
         self.fields['first_name'].label = 'Primer nombre'
         self.fields['last_name'].label = 'Primer apellido'
         self.fields['username'].label = 'Usuario'
+        self.fields['is_active'].label = '¿Activo?'
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['username'].required = True
@@ -187,9 +188,8 @@ class FormActualizarUsuario (UserCreationForm):
             'numero_documento',
             'telefono',
             'username',
-            'rol',
-            'password1',
-            'password2'
+            'is_active',
+            'rol'
         )
 
     def __init__(self, *args, **kwargs):
@@ -218,13 +218,10 @@ class FormActualizarUsuario (UserCreationForm):
         self.fields['username'].widget.attrs = {
             'class': 'form-control'
         }
+        self.fields['is_active'].widget.attrs = {
+            'class': 'form-control'
+        }
         self.fields['rol'].widget.attrs = {
-            'class': 'form-control'
-        }
-        self.fields['password1'].widget.attrs = {
-            'class': 'form-control'
-        }
-        self.fields['password2'].widget.attrs = {
             'class': 'form-control'
         }
 
