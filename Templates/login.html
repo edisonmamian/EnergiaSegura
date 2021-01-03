@@ -13,6 +13,9 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
 
+    <!-- Toastr style -->
+    <link href="{% static 'css/plugins/toastr/toastr.min.css' %}" rel="stylesheet">
+
     <link href="{% static 'css/animate.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
@@ -32,13 +35,8 @@
                 <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             </p>
             <p>Inicia sesión.</p>
-            <form class="m-t" role="form" action="index.html">
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Usuario" required="">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Contraseña" required="">
-                </div>
+            <form class="m-t" role="form" method="POST"> {% csrf_token %}
+                {{ form.as_p }}
                 <button type="submit" class="btn btn-primary block full-width m-b">Iniciar sesión</button>
 
                 <a href="#"><small>¿Olvidó su contraseña?</small></a
@@ -47,10 +45,41 @@
         </div>
     </div>
 
+    <div class="toast toast toast-bootstrap hide" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top:20px; right:20px">
+        <div class="toast-header">
+            <i class="fa fa-square text-navy"> </i>
+            <strong class="mr-auto m-l-sm">Notificación</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
     <!-- Mainly scripts -->
     <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.js' %}"></script>
+
+    <!-- Toastr -->
+    <script src="{% static 'js/plugins/toastr/toastr.min.js' %}"></script>
+
+    <script type="text/javascript">
+        {% for msg in messages %}
+            $(document).ready(function(){
+                setTimeout(function() {
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                        "showEasing": "swing"
+                    }
+                    toastr["{{ msg.tags }}"]("{{msg}}")
+                },500);
+            });
+        {% endfor %}
+
+        //inhabilita el autocompletar de los formularios
+         $('form').attr('autocomplete','off');
+    </script>
 
 </body>
 

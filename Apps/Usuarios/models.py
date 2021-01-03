@@ -76,3 +76,6 @@ class Usuario (User):
 
     def __str__(self):
         return '%s %s %s %s' % (self.first_name , self.segundo_nombre , self.last_name , self.segundo_apellido)
+
+# cd .. && source pesaje/bin/activate && cd EnergiaSegura
+# cd /home/edison/Documentos && source pesaje/bin/activate && cd EnergiaSegura && python manage.py runserver

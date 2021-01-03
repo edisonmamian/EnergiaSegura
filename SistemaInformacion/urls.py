@@ -24,5 +24,4 @@ urlpatterns = [
     path('analisislaboratorio/', include('Apps.AnalisisLaboratorio.urls')),
     path('clientes/', include('Apps.Clientes.urls')),
     path('select2/', include('django_select2.urls')),
-    path('', LoginView.as_view(template_name = 'login.html'), name='iniciar_sesion')
 ]

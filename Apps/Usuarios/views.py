@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.views.generic import CreateView, ListView, UpdateView, DetailView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, ListView, UpdateView, DetailView, FormView
 from django.contrib import messages
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
 from .models import *
 from .forms import *
 
@@ -119,3 +122,44 @@ class ActualizarUsuario (UpdateView):
         context = super(ActualizarUsuario, self).get_context_data(**kwargs)
         context['boton']= "Actualizar"
         return context
+
+class LoginUsuario(FormView):
+    template_name = 'login.html'
+    form_class = LoginForm
+    template_name = 'login.html'
+    success_url = reverse_lazy ('Usuarios:listar')
+
+    def form_valid(self, form):
+        credentials = form.cleaned_data
+
+        user = authenticate(
+            username = credentials['username'],
+            password = credentials['password']
+        )
+
+        if user is not None:
+            login (self.request, user)
+            return HttpResponseRedirect(self.success_url)
+        else:
+            messages.error(
+                self.request,
+                "No se pudo autenticar en el sistema"
+            )
+            return HttpResponseRedirect(reverse_lazy('Usuarios:login'))
+
+    """def get_success_url(self):
+        print (self.request.user)
+        return reverse("Usuarios:listar")
+
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            pass
+
+        return super(LoginUsuario, self).get(*args, **kwargs)
+
+    def form_invalid (self, form):
+        messages.error (
+            self.request,
+            "Error al autenticarse"
+        )
+        return super(LoginUsuario, self).form_invalid(form)"""

@@ -9,4 +9,5 @@ urlpatterns = [
     path ('crear/', CrearUsuario.as_view(), name = 'crear'),
     path ('listar/', ListarUsuario.as_view(), name = 'listar'),
     path ('editar/<int:pk>/', ActualizarUsuario.as_view(), name = 'editar'),
+    path ('login/', LoginUsuario.as_view(), name = 'login')
 ]
