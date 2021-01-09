@@ -11,5 +11,6 @@ urlpatterns = [
     path ('editar/<int:pk>/', ActualizarUsuario.as_view(), name = 'editar'),
     path ('perfil/', ActualizarPerfil.as_view(), name = 'perfil'),
     path ('login/', LoginUsuario.as_view(), name = 'login'),
-    path ('logout/', LogoutUsuario, name = 'logout')
+    path ('logout/', LogoutUsuario, name = 'logout'),
+    path ('password/', change_password, name = 'password')
 ]
