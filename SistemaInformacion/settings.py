@@ -27,17 +27,19 @@ SECRET_KEY = '%o^&j7_fg8j=0m+tqqnt+334&ikri@i0rz8^i3!7ikxg))y*+z'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+SITE_ID=1
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'django_select2',
     'crispy_forms',
     'Apps.Usuarios',

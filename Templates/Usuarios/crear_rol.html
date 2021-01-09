@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block extrahead %}
-
+  <link href="{% static 'css/plugins/select2/select2.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/plugins/select2/select2-bootstrap4.min.css' %}" rel="stylesheet">
 {% endblock%}
 
 {% block contenido %}
@@ -49,6 +50,7 @@
                           <tr>
                               <th>Nombre</th>
                               <th>Estado</th>
+                              <th>Permisos</<th>
                               <th>Acción</th>
                           </tr>
                       </thead>
@@ -60,6 +62,11 @@
                                   </td>
                                   <td>
                                       {{ tipo.estado }}
+                                  </td>
+                                  <td>
+                                    {% for permiso in tipo.permisos.all %}
+                                        <li> {{ permiso }} </li>
+                                    {% endfor %}
                                   </td>
                                   <td>
                                       <a href="{% url 'Usuarios:editar_rol' tipo.id %}" class="btn btn-primary"> Editar </a>
@@ -83,8 +90,26 @@
 {% endblock%}
 
 {% block scripts %}
-
+    {{ form.media.js }}
     <script src="{% static 'js/plugins/footable/footable.all.min.js' %}"></script>
+    <script src="{% static 'js/plugins/select2/select2.full.min.js' %}"></script>
+    <script src="{% static 'js/plugins/footable/footable.all.min.js' %}"></script>
+
+    <script>
+      $(document).ready(function() {
+
+          $('.footable').footable();
+          $(".select2_demo_2").select2({
+              theme: 'bootstrap4',
+          });
+          $(".select2_demo_2").djangoSelect2();
+
+      });
+
+
+
+    </script>
+
     <script>
       $(document).ready(function() {
 

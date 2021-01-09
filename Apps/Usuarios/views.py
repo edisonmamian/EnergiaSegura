@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.views.generic import CreateView, ListView, UpdateView, DetailView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, ListView, UpdateView, DetailView, FormView
 from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, login, logout,update_session_auth_hash
+from django.http import HttpResponseRedirect, HttpResponse
+from SistemaInformacion.utilities import verificar_permiso
 from .models import *
 from .forms import *
 
@@ -67,6 +72,10 @@ class CrearUsuario (CreateView):
     template_name = "Usuarios/crear.html"
     form_class = FormCrearUsuario
 
+    @verificar_permiso(permiso_requerido = 'crear usuarios')
+    def dispatch(self, request, *args, **kwargs):
+        return super(CrearUsuario, self).dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse("Usuarios:listar")
 
@@ -92,6 +101,7 @@ class CrearUsuario (CreateView):
 class ListarUsuario (ListView):
     model = Usuario
     template_name = "Usuarios/listar.html"
+
 
 class ActualizarUsuario (UpdateView):
     model = Usuario
@@ -119,3 +129,78 @@ class ActualizarUsuario (UpdateView):
         context = super(ActualizarUsuario, self).get_context_data(**kwargs)
         context['boton']= "Actualizar"
         return context
+
+class ActualizarPerfil (UpdateView):
+    model = Usuario
+    template_name = "Usuarios/crear.html"
+    form_class = FormActualizarPerfil
+
+    def get_success_url(self):
+        return reverse("Usuarios:listar")
+
+    def get_object(self):
+        usuario = Usuario.objects.get(pk=self.request.user.id)
+        return usuario
+
+    def form_valid(self, form):
+        message.success(
+            self.request,
+            "Se ha actualizado exitosamente su perfil"
+        )
+
+    def form_invalid(self, form):
+        message.error (
+            self.request,
+            "Error al actualizar su perfil, por favor revise los datos"
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super(ActualizarPerfil, self).get_context_data(**kwargs)
+        context['boton'] = "Actualizar"
+        return context
+
+class LoginUsuario(FormView):
+    template_name = 'login.html'
+    form_class = LoginForm
+    template_name = 'login.html'
+    success_url = reverse_lazy ('Usuarios:listar')
+
+    def form_valid(self, form):
+        credentials = form.cleaned_data
+
+        user = authenticate(
+            username = credentials['username'],
+            password = credentials['password']
+        )
+
+        if user is not None:
+            login (self.request, user)
+            return HttpResponseRedirect(self.success_url)
+        else:
+            messages.error(
+                self.request,
+                "No se pudo autenticar en el sistema"
+            )
+            return HttpResponseRedirect(reverse_lazy('Usuarios:login'))
+
+def LogoutUsuario(request):
+    logout(request)
+    return HttpResponseRedirect(reverse_lazy('Usuarios:login'))
+
+def change_password(request):
+    print(request)
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Se ha actualizado la contraseña satisfactoriamente')
+            return HttpResponseRedirect(reverse_lazy('Usuarios:listar'))
+        else:
+            messages.error(request, 'Error al actualizar la contraseña, por favor verifique los datos')
+    else:
+        form = PasswordChangeForm(request.user)
+
+    return render(
+        request, 'Usuarios/password.html', {'form': form}
+    )

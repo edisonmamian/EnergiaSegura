@@ -53,8 +53,9 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="gradeX">
+
                         {% for usuario in object_list %}
+                        <tr class="gradeX">
                           <td> {{ usuario.first_name }} </td>
                           <td> {{ usuario.segundo_nombre }} </td>
                           <td> {{ usuario.last_name }} </td>
@@ -74,8 +75,9 @@
                           <td>
                             <a href="{% url 'Usuarios:editar' usuario.id %}" class="btn btn-primary"> Editar </a>
                           </td>
+                        </tr>
                         {% endfor %}
-                      </tr>
+
                     </tbody>
 
                     <tfoot>
