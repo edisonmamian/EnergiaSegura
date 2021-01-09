@@ -104,20 +104,56 @@
   "nombre": "Administrador",
   "estado": "Activo",
   "permisos": [
-   1
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14
   ]
  }
 },
 {
- "model": "Usuarios.usuario",
- "pk": 1,
+ "model": "Usuarios.roles",
+ "pk": 2,
  "fields": {
-  "tipo_documento": "CC",
-  "numero_documento": "1143860555",
-  "telefono": "3145127715",
-  "segundo_nombre": "Felipe",
-  "segundo_apellido": "Ceron",
-  "rol": 1
+  "nombre": "Auxiliar administrativo",
+  "estado": "Activo",
+  "permisos": [
+   8
+  ]
+ }
+},
+{
+ "model": "Usuarios.roles",
+ "pk": 3,
+ "fields": {
+  "nombre": "Director de laboratorio",
+  "estado": "Activo",
+  "permisos": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14
+  ]
  }
 }
 ]

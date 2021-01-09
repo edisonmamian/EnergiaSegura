@@ -2,9 +2,7 @@ import os
 
 from django.conf import settings
 from django.contrib import messages
-from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
-from django.db import models, connection
 
 def verificar_permiso (permiso_requerido):
     def _method_wrapper (view_method):
@@ -19,14 +17,19 @@ def verificar_permiso (permiso_requerido):
                 except KeyError:
                     try:
                         permisos = request.user.usuario.rol.permisos.all()
-                        request.session['permisos']
+                        arreglo = []
+                        for permiso in permisos:
+                            arreglo.append(str(permiso))
+                        request.session['permisos'] = arreglo
+                        permisos = arreglo
                     except IndexError:
                         messages.error(request, "Para acceder a la página solicitada requiere inicar sesión")
                         return redirect('Usuarios:login')
 
-                    if not (permiso_requerido in permisos):
-                        message.error(request, "No cuenta con los permisos requeridos para esta acción")
-                        return redirect('Usuarios:login')
+                
+                if not (permiso_requerido in permisos):
+                    messages.error(request, "No cuenta con los permisos requeridos para esta acción")
+                    return redirect('Usuarios:listar')
             except AttributeError:
                 messages.error(request, "Para acceder a la página solicitada requiere inicar sesión")
                 return redirect('Usuarios:login')

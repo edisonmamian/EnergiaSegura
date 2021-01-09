@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
+from SistemaInformacion.utilities import verificar_permiso
 from .models import *
 from .forms import *
 
@@ -69,6 +70,10 @@ class CrearUsuario (CreateView):
     model = Usuario
     template_name = "Usuarios/crear.html"
     form_class = FormCrearUsuario
+
+    @verificar_permiso(permiso_requerido = 'crear usuarios')
+    def dispatch(self, request, *args, **kwargs):
+        return super(CrearUsuario, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse("Usuarios:listar")
