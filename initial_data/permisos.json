@@ -1,0 +1,123 @@
+[
+{
+ "model": "Usuarios.permisos",
+ "pk": 1,
+ "fields": {
+  "nombre": "crear usuarios"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 2,
+ "fields": {
+  "nombre": "editar usuarios"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 3,
+ "fields": {
+  "nombre": "listar usuarios"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 4,
+ "fields": {
+  "nombre": "crear roles"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 5,
+ "fields": {
+  "nombre": "editar roles"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 6,
+ "fields": {
+  "nombre": "crear tipos de cilindros"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 7,
+ "fields": {
+  "nombre": "editar tipos de cilindros"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 8,
+ "fields": {
+  "nombre": "crear fases"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 9,
+ "fields": {
+  "nombre": "editar fases"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 10,
+ "fields": {
+  "nombre": "crear analisis"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 11,
+ "fields": {
+  "nombre": "editar analisis"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 12,
+ "fields": {
+  "nombre": "crear clientes"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 13,
+ "fields": {
+  "nombre": "editar clientes"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 14,
+ "fields": {
+  "nombre": "listar clientes"
+ }
+},
+{
+ "model": "Usuarios.roles",
+ "pk": 1,
+ "fields": {
+  "nombre": "Administrador",
+  "estado": "Activo",
+  "permisos": [
+   1
+  ]
+ }
+},
+{
+ "model": "Usuarios.usuario",
+ "pk": 1,
+ "fields": {
+  "tipo_documento": "CC",
+  "numero_documento": "1143860555",
+  "telefono": "3145127715",
+  "segundo_nombre": "Felipe",
+  "segundo_apellido": "Ceron",
+  "rol": 1
+ }
+}
+]
