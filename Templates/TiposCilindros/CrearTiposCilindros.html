@@ -17,7 +17,7 @@
   		{% crispy form %}
   		<div class="form-group">
   			<label class="control-label col-md-4 col-sm-4"></label>
-  			
+
   		</div>
   	</form>
   </div>
@@ -89,5 +89,24 @@
 
       });
 
+  </script>
+  <script type="text/javascript">
+    (function(){
+      if(document.getElementById("id_vidaUtilIndefinida").checked){
+        document.getElementById('div_id_vidaUtil').style.display = 'none';
+      }else{
+        document.getElementById('div_id_vidaUtil').style.display = 'block';
+      }
+    })();
+
+    (function(){
+      document.getElementById("id_vidaUtilIndefinida").onchange = function(){
+        if(document.getElementById("id_vidaUtilIndefinida").checked){
+          document.getElementById('div_id_vidaUtil').style.display = 'none';
+        }else{
+          document.getElementById('div_id_vidaUtil').style.display = 'block';
+        }
+      }
+    })();
   </script>
 {%endblock%}
