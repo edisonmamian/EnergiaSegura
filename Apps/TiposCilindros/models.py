@@ -17,7 +17,12 @@ class TiposCilindros (models.Model):
         decimal_places=3,
         validators=[MinValueValidator(0.0)],
         verbose_name='Vida útil en años',
-        null=False
+        null=True,
+        blank = True
+    )
+    vidaUtilIndefinida = models.BooleanField(
+        verbose_name = '¿Vida útil indefinida?',
+        default = False
     )
     estado = models.CharField(
         max_length=8,

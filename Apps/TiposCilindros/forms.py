@@ -10,6 +10,7 @@ class FormCrearTiposCilindros (forms.ModelForm):
         model = TiposCilindros
         fields = [
             'nombre',
+            'vidaUtilIndefinida',
             'vidaUtil',
             'estado'
         ]
@@ -25,6 +26,7 @@ class FormCrearTiposCilindros (forms.ModelForm):
         self.helper.layout = Layout(
             Div(
                 Field('nombre'),
+                Field('vidaUtilIndefinida'),
                 Field('vidaUtil'),
                 Field('estado'),
                 HTML("<br>"),
@@ -36,6 +38,9 @@ class FormCrearTiposCilindros (forms.ModelForm):
             )
 
         self.fields['nombre'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['vidaUtilIndefinida'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['vidaUtil'].widget.attrs = {
@@ -63,6 +68,7 @@ class FormEditarTiposCilindros (forms.ModelForm):
         model = TiposCilindros
         fields = [
             'nombre',
+            'vidaUtilIndefinida',
             'vidaUtil',
             'estado'
         ]
@@ -78,6 +84,7 @@ class FormEditarTiposCilindros (forms.ModelForm):
         self.helper.layout = Layout(
             Div(
                 Field('nombre'),
+                Field('vidaUtilIndefinida'),
                 Field('vidaUtil'),
                 Field('estado'),
                 HTML("<br>"),
@@ -89,6 +96,9 @@ class FormEditarTiposCilindros (forms.ModelForm):
             )
 
         self.fields['nombre'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['vidaUtilIndefinida'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['vidaUtil'].widget.attrs = {

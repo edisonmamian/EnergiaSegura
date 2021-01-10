@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.views.generic import CreateView, ListView, UpdateView, DetailView
 from django.contrib import messages
 from django.forms import formset_factory
+from SistemaInformacion.utilities import verificar_permiso
 from .models import *
 from .forms import *
 
@@ -11,6 +12,10 @@ class CrearTipoCilindro (CreateView):
     model = TiposCilindros
     template_name = "TiposCilindros/CrearTiposCilindros.html"
     form_class = FormCrearTiposCilindros
+
+    @verificar_permiso(permiso_requerido = 'crear tipos de cilindros')
+    def dispatch(self, request, *args, **kwargs):
+        return super(CrearTipoCilindro, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse("TiposCilindros:crear")
@@ -61,6 +66,10 @@ class ActualizarTipoCilindro (UpdateView):
     model = TiposCilindros
     template_name = "TiposCilindros/CrearTiposCilindros.html"
     form_class = FormEditarTiposCilindros
+
+    @verificar_permiso(permiso_requerido = 'editar tipos de cilindros')
+    def dispatch(self, request, *args, **kwargs):
+        return super(ActualizarTipoCilindro, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse("TiposCilindros:crear")

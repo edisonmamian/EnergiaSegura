@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView, ListView, UpdateView, DetailView
 from django.contrib import messages
+from SistemaInformacion.utilities import verificar_permiso
 from .models import *
 from .forms import *
 # Create your views here.
@@ -9,6 +10,10 @@ class CrearFase (CreateView):
     model = Fases
     template_name = "AnalisisLaboratorio/fases.html"
     form_class = FormCrearFases
+
+    @verificar_permiso(permiso_requerido = 'crear fases')
+    def dispatch(self, request, *args, **kwargs):
+        return super(CrearFase, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse("AnalisisLaboratorio:fases_crear")
@@ -38,6 +43,10 @@ class EditarFase (UpdateView):
     template_name = "AnalisisLaboratorio/fases.html"
     form_class = FormEditarFases
 
+    @verificar_permiso(permiso_requerido = 'editar fases')
+    def dispatch(self, request, *args, **kwargs):
+        return super(EditarFase, self).dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse("AnalisisLaboratorio:fases_crear")
 
@@ -66,6 +75,10 @@ class CrearAnalisis (CreateView):
     template_name = "AnalisisLaboratorio/analisis.html"
     form_class = FormCrearAnalisis
 
+    @verificar_permiso(permiso_requerido = 'crear analisis')
+    def dispatch(self, request, *args, **kwargs):
+        return super(CrearAnalisis, self).dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse("AnalisisLaboratorio:crear")
 
@@ -93,6 +106,10 @@ class EditarAnalisis (UpdateView):
     model = Analisis
     template_name = "AnalisisLaboratorio/analisis.html"
     form_class = FormEditarAnalisis
+
+    @verificar_permiso(permiso_requerido = 'editar analisis')
+    def dispatch(self, request, *args, **kwargs):
+        return super(EditarAnalisis, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse("AnalisisLaboratorio:crear")
