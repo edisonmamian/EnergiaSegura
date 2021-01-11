@@ -16,6 +16,10 @@ class CrearRol (CreateView):
     template_name = "Usuarios/crear_rol.html"
     form_class = FormCrearRoles
 
+    @verificar_permiso(permiso_requerido = 'crear roles')
+    def dispatch(self, request, *args, **kwargs):
+        return super(CrearRol, self).dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse("Usuarios:crear_rol")
 
@@ -43,6 +47,10 @@ class ActualizarRol (UpdateView):
     model = Roles
     template_name = "Usuarios/crear_rol.html"
     form_class = FormEditarRoles
+
+    @verificar_permiso(permiso_requerido = 'editar roles')
+    def dispatch(self, request, *args, **kwargs):
+        return super(ActualizarRol, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse("Usuarios:crear_rol")
@@ -102,11 +110,19 @@ class ListarUsuario (ListView):
     model = Usuario
     template_name = "Usuarios/listar.html"
 
+    @verificar_permiso(permiso_requerido = 'listar usuarios')
+    def dispatch(self, request, *args, **kwargs):
+        return super(ListarUsuario, self).dispatch(request, *args, **kwargs)
+
 
 class ActualizarUsuario (UpdateView):
     model = Usuario
     template_name = "Usuarios/crear.html"
     form_class = FormActualizarUsuario
+
+    @verificar_permiso(permiso_requerido = 'editar usuarios')
+    def dispatch(self, request, *args, **kwargs):
+        return super(ActualizarUsuario, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse("Usuarios:listar")
