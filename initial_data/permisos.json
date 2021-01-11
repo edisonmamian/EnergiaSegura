@@ -98,6 +98,20 @@
  }
 },
 {
+ "model": "Usuarios.permisos",
+ "pk": 15,
+ "fields": {
+  "nombre": "crear clasificacion"
+ }
+},
+{
+ "model": "Usuarios.permisos",
+ "pk": 16,
+ "fields": {
+  "nombre": "editar clasificacion"
+ }
+},
+{
  "model": "Usuarios.roles",
  "pk": 1,
  "fields": {
@@ -117,7 +131,9 @@
    11,
    12,
    13,
-   14
+   14,
+   15,
+   16
   ]
  }
 },
@@ -154,6 +170,30 @@
    13,
    14
   ]
+ }
+},
+{
+ "model": "Usuarios.usuario",
+ "pk": 1,
+ "fields": {
+  "tipo_documento": "CC",
+  "numero_documento": "111111111",
+  "telefono": "11111111",
+  "segundo_nombre": "",
+  "segundo_apellido": "",
+  "rol": 1
+ }
+},
+{
+ "model": "Usuarios.usuario",
+ "pk": 2,
+ "fields": {
+  "tipo_documento": "CC",
+  "numero_documento": "1144556677",
+  "telefono": "3145127715",
+  "segundo_nombre": "",
+  "segundo_apellido": "",
+  "rol": 2
  }
 }
 ]

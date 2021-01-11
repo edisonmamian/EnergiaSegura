@@ -2,13 +2,14 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView, ListView, UpdateView, DetailView
 from django.contrib import messages
+from SistemaInformacion.utilities import verificar_permiso
 from .models import *
 from .forms import *
 import requests
 import json
 
 # Create your views here.
-class ActualizarDepartamentoCiudades ():
+"""class ActualizarDepartamentoCiudades ():
 
     with open('static/dep_ciudades.json') as file:
         data = json.load(file)
@@ -23,15 +24,19 @@ class ActualizarDepartamentoCiudades ():
                 nombre = municipio['Nombre_Municipio'],
                 codigo_dane = municipio['Codigo_Deapartamento'] + municipio['Codigo_Municipio'],
                 departamento = departamento
-            )
+            )"""
 
 class CrearClientes (CreateView):
     model = Clientes
     template_name = "Clientes/crear_cliente.html"
     form_class = FormCrearCliente
 
+    @verificar_permiso(permiso_requerido = 'crear clientes')
+    def dispatch(self, request, *args, **kwargs):
+        return super(CrearClientes, self).dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
-        return reverse("Clientes:crear")
+        return reverse("Clientes:listar")
 
     def form_valid (self, form):
         messages.success (
@@ -57,8 +62,12 @@ class EditarClientes (UpdateView):
     template_name = "Clientes/crear_cliente.html"
     form_class = FormEditarCliente
 
+    @verificar_permiso(permiso_requerido = 'editar clientes')
+    def dispatch(self, request, *args, **kwargs):
+        return super(EditarClientes, self).dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
-        return reverse("Clientes:crear")
+        return reverse("Clientes:listar")
 
     def form_valid (self, form):
         messages.success (
@@ -79,10 +88,22 @@ class EditarClientes (UpdateView):
         context['boton']= "Editar"
         return context
 
+class ListarClientes (ListView):
+    model = Clientes
+    template_name = "Clientes/listar_clientes.html"
+
+    @verificar_permiso(permiso_requerido = 'listar clientes')
+    def dispatch(self, request, *args, **kwargs):
+        return super(ListarClientes, self).dispatch(request, *args, **kwargs)
+
 class CrearClasificacion (CreateView):
     model = ClasificacionClientes
     template_name = "Clientes/clasificacion.html"
     form_class = FormCrearClasificacion
+
+    @verificar_permiso(permiso_requerido = 'crear clasificacion')
+    def dispatch(self, request, *args, **kwargs):
+        return super(CrearClasificacion, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse("Clientes:clasificacion_crear")
@@ -112,6 +133,10 @@ class EditarClasificacion (UpdateView):
     model = ClasificacionClientes
     template_name = "Clientes/clasificacion.html"
     form_class = FormCrearClasificacion
+
+    @verificar_permiso(permiso_requerido = 'editar clasificacion')
+    def dispatch(self, request, *args, **kwargs):
+        return super(EditarClasificacion, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse("Clientes:clasificacion_crear")

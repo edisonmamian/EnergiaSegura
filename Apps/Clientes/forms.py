@@ -1,5 +1,5 @@
 from django import forms
-from django_select2.forms import ModelSelect2MultipleWidget
+from django_select2.forms import ModelSelect2MultipleWidget, ModelSelect2Widget
 from .models import *
 from Apps.TiposCilindros.models import TiposCilindros
 
@@ -30,8 +30,6 @@ class FormCrearCliente (forms.ModelForm):
         ]
 
         widgets = {
-
-
             'clasificacion' : ModelSelect2MultipleWidget (
                 model = Clientes,
                 search_fields = ['nombre__icontains'],
@@ -40,6 +38,23 @@ class FormCrearCliente (forms.ModelForm):
                     'multiple': 'multiple'
                 }
             ),
+            'departamento' : ModelSelect2Widget (
+                model = Departamentos,
+                search_fields = ['nombre__icontains'],
+                attrs = {
+                    'class': 'select2_demo_2 form-control'
+                }
+            ),
+            'ciudad' : ModelSelect2Widget (
+                model = Ciudades,
+                search_fields = ['nombre__icontains'],
+                dependent_fields = {
+                    'departamento': 'departamento'
+                },
+                attrs = {
+                    'class': 'select2_demo_2 form-control'
+                }
+            )
         }
 
     def __init__(self, *args, **kwargs):
@@ -54,9 +69,6 @@ class FormCrearCliente (forms.ModelForm):
             'class': 'form-control'
         }
         self.fields['numero_identificacion'].widget.attrs = {
-            'class': 'form-control'
-        }
-        self.fields['departamento'].widget.attrs = {
             'class': 'form-control'
         }
         self.fields['ciudad'].widget.attrs = {
