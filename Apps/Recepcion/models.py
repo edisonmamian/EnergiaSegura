@@ -12,7 +12,7 @@ class Recepcion (models.Model):
     )
     colaborador = models.ForeignKey(
         Usuario,
-        limit_choices_to={'estado': 'Activo'},
+        limit_choices_to={'is_active': True},
         on_delete=models.CASCADE,
         verbose_name = 'Colaborador que recibe'
     )
@@ -21,6 +21,11 @@ class Recepcion (models.Model):
         limit_choices_to={'estado': 'Activo'},
         on_delete=models.CASCADE,
         verbose_name = 'Cliente'
+    )
+    consecutivo = models.IntegerField(
+        null = False,
+        blank = False,
+        verbose_name = 'Consecutivo'
     )
 
 class Cilindro (models.Model):
