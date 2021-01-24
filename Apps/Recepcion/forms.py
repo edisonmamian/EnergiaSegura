@@ -5,6 +5,7 @@ from .models import *
 from Apps.Clientes.models import Clientes
 from Apps.Usuarios.models import Usuario
 from datetime import datetime
+from uuid import uuid4
 # form django.db import transaction
 
 class FormRecepcion (forms.ModelForm):
@@ -26,26 +27,14 @@ class FormRecepcion (forms.ModelForm):
                 }
             ),
 
-            'colaborador': forms.TextInput(attrs={
-                'class': 'form-control',
-                'readonly' : 'readonly'
-            }),
+
         }
 
     def __init__(self, user, *args, **kwargs):
         super(FormRecepcion, self).__init__(*args, **kwargs)
 
-        """consecutivo = Recepcion.objects.all().annotate(Max('consecutivo'))
 
-        for data in consecutivo:
-            print (data)
-
-        if consecutivo:
-            valor = consecutivo.consecutivo + 1
-        else:
-            valor = 1
-
-        self.fields['consecutivo'].initial = valor"""
+        self.fields['consecutivo'].initial = uuid4().int >> 100
         self.fields['fecha'].initial = datetime.now()
         self.fields['colaborador'].initial = user.usuario
 
@@ -59,7 +48,7 @@ class FormRecepcion (forms.ModelForm):
             'class': 'form-control',
             'readonly': 'readonly'
         }
-        """self.fields['colaborador'].widget.attrs = {
+        self.fields['colaborador'].widget.attrs = {
             'class': 'form-control',
             'readonly': 'readonly'
-        }"""
+        }

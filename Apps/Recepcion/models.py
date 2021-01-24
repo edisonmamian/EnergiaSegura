@@ -25,7 +25,7 @@ class Recepcion (models.Model):
     consecutivo = models.IntegerField(
         null = False,
         blank = False,
-        verbose_name = 'Consecutivo'
+        verbose_name = 'Número de recepción'
     )
 
 class Cilindro (models.Model):
