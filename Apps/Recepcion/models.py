@@ -62,7 +62,11 @@ class Cilindro (models.Model):
     )
     analisis = models.ForeignKey (
         TiposCilindros_Analisis,
-        limit_choices_to={'estado': 'Activo'},
         on_delete=models.CASCADE,
         verbose_name = 'Análisis a realizar'
+    )
+    recepcion = models.ForeignKey (
+        Recepcion,
+        on_delete = models.CASCADE,
+        verbose_name = 'Recepción'
     )

@@ -42,4 +42,12 @@ class CrearRecepcion (CreateView):
     def get_context_data (self, **kwargs):
         context = super(CrearRecepcion, self).get_context_data(**kwargs)
         context['boton'] = 'Registrar'
+
+        if self.request.POST:
+            context['cilindro'] = FormSet_Cilindros (
+                self.request.POST
+            )
+        else:
+            context['cilindro'] = FormSet_Cilindros ()
+
         return context
