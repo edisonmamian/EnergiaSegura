@@ -58,7 +58,7 @@ class FormRecepcion (forms.ModelForm):
                 Fieldset('Agregar análisis',
                     Formset('cilindro')),
                 HTML("<br>"),
-                ButtonHolder(Submit('submit', 'Actualizar')),
+                ButtonHolder(Submit('submit', 'Registrar')),
             )
         )
 
