@@ -28,14 +28,14 @@ class CrearRecepcion (CreateView):
     def form_valid (self, form):
         messages.success (
             self.request,
-            "Se ha realizado la recepción de cilindros exitosamente"
+            "Se ha realizado la recepción de los ítems de ensayo exitosamente"
         )
         return super(CrearRecepcion, self).form_valid(form)
 
     def form_invalid(self, form):
         messages.error(
             self.request,
-            "Error al realizar la recepción, por favor revise el dato"
+            "Error al realizar la recepción, por favor revise los datos"
         )
         return super(CrearRecepcion, self).form_invalid(form)
 
