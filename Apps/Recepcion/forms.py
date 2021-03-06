@@ -46,14 +46,10 @@ class FormRecepcion (forms.ModelForm):
         self.helper.field_class = 'col-md-12'
         self.helper.layout = Layout(
             Div (
-                Field('fabricante'),
-                Field('serial'),
-                Field('capacidad'),
-                Field('ultima_prueba'),
-                Field('accesorios'),
-                Field('valvula'),
-                Field('tipo_cilindro'),
-                Field('analisis'),
+                Field('consecutivo'),
+                Field('fecha'),
+                Field('colaborador'),
+                Field('cliente'),
                 HTML("<br>"),
                 Fieldset('Agregar análisis',
                     Formset('cilindro')),

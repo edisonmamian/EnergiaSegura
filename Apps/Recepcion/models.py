@@ -58,7 +58,7 @@ class Cilindro (models.Model):
         TiposCilindros,
         limit_choices_to={'estado': 'Activo'},
         on_delete=models.CASCADE,
-        verbose_name = 'Tipo de cilindro'
+        verbose_name = 'Tipo de objeto de ensayo'
     )
     analisis = models.ForeignKey (
         TiposCilindros_Analisis,
