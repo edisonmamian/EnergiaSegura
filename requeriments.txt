@@ -4,7 +4,7 @@ django-appconf==1.0.4
 django-crispy-forms==1.9.2
 django-redis==4.12.1
 django-select2==7.4.2
-pkg-resources==0.0.0
+#pkg-resources
 pytz==2020.1
 redis==3.5.3
 sqlparse==0.3.1

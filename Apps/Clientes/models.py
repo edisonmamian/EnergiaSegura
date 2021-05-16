@@ -181,3 +181,40 @@ class Clientes (models.Model):
 
     def __str__(self):
         return self.nombre
+
+
+class SedeCliente (models.Model):
+    nombre = models.CharField(
+        max_length=50,
+        null=False,
+        verbose_name='Nombre o razón social'
+    )
+    estado = models.CharField(
+        max_length=8,
+        null=False,
+        choices=ESTADOS,
+        verbose_name='Estado'
+    )
+    departamento = models.ForeignKey(
+        Departamentos,
+        on_delete=models.CASCADE,
+        verbose_name = 'Departamento'
+    )
+    ciudad = models.ForeignKey(
+        Ciudades,
+        on_delete=models.CASCADE,
+        verbose_name='Ciudad'
+    )
+    direccion = models.CharField(
+        max_length = 50,
+        null = False,
+        verbose_name = 'Dirección'
+    )
+    cliente = models.ForeignKey(
+        Clientes,
+        on_delete=models.CASCADE,
+        verbose_name='Cliente'
+    )
+
+    def __str__(self):
+        return self.nombre
