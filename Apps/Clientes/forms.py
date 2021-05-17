@@ -1,5 +1,9 @@
 from django import forms
+from django.db.models import fields
 from django_select2.forms import ModelSelect2MultipleWidget, ModelSelect2Widget
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field, Fieldset, Div, HTML, ButtonHolder, Submit
+from django.forms.models import inlineformset_factory
 from .models import *
 from Apps.TiposCilindros.models import TiposCilindros
 
@@ -115,7 +119,7 @@ class FormCrearCliente (forms.ModelForm):
         }
 
     def clean (self):
-        form_data = super(FormCrearFases, self).clean()
+        form_data = super(FormCrearCliente, self).clean()
 
         try:
             fase = Clientes.objects.get(
@@ -297,7 +301,7 @@ class FormEditarClasificacion (forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(FormCrearClasificacion, self).__init__(*args, **kwargs)
+        super(FormEditarClasificacion, self).__init__(*args, **kwargs)
         self.fields['nombre'].widget.attrs = {
             'class': 'form-control'
         }
@@ -306,7 +310,7 @@ class FormEditarClasificacion (forms.ModelForm):
         }
 
     def clean (self):
-        form_data = super(FormCrearClasificacion, self).clean()
+        form_data = super(FormEditarClasificacion, self).clean()
 
         try:
             clasificacion = ClasificacionClientes.objects.exclude(
@@ -315,3 +319,43 @@ class FormEditarClasificacion (forms.ModelForm):
             self._errors['nombre'] = ['La clasificación de clientes ya existe']
         except ClasificacionClientes.DoesNotExist:
             pass
+
+class FormCrearSede (forms.ModelForm):
+    class Meta:
+        model = SedeCliente
+        fields = [
+            'nombre',
+            'estado',
+            'departamento',
+            'ciudad',
+            'direccion'
+        ]
+
+        widgets = {
+            'departamento' : ModelSelect2Widget (
+                model = Departamentos,
+                search_fields = ['nombre__icontains'],
+                attrs = {
+                    'class': 'select2_demo_2 form-control'
+                }
+            ),
+            'ciudad' : ModelSelect2Widget (
+                model = Ciudades,
+                search_fields = ['nombre__icontains'],
+                dependent_fields = {
+                    'departamento': 'departamento'
+                },
+                attrs = {
+                    'class': 'select2_demo_2 form-control'
+                }
+            )
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(FormCrearSede, self).__init__(*args, **kwargs)
+        self.fields['nombre'].widget.attrs = {
+            'class': 'form-control'
+        }
+        self.fields['estado'].widget.attrs = {
+            'class': 'form-control'
+        }
