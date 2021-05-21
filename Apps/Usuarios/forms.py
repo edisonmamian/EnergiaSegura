@@ -83,15 +83,6 @@ class FormEditarRoles (forms.ModelForm):
             pass
 
 class FormCrearUsuario (UserCreationForm):
-    def __init__(self, *args, **kwargs):
-        super(FormCrearUsuario, self).__init__(*args, **kwargs)
-        self.fields['first_name'].label = 'Primer nombre'
-        self.fields['last_name'].label = 'Primer apellido'
-        self.fields['username'].label = 'Usuario'
-        self.fields['first_name'].required = True
-        self.fields['last_name'].required = True
-        self.fields['username'].required = True
-
     class Meta:
         model = Usuario
         fields = (
@@ -110,6 +101,13 @@ class FormCrearUsuario (UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(FormCrearUsuario, self).__init__(*args, **kwargs)
+        self.fields['first_name'].label = 'Primer nombre'
+        self.fields['last_name'].label = 'Primer apellido'
+        self.fields['username'].label = 'Usuario'
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        self.fields['username'].required = True
+
         self.fields['first_name'].widget.attrs = {
             'class': 'form-control'
         }

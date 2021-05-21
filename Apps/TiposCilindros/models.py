@@ -32,7 +32,7 @@ class TiposCilindros (models.Model):
     )
 
     class Meta:
-        verbose_name = "Tipos de cilindros"
+        verbose_name = "Tipos de ítem de ensayo"
         ordering = ['nombre', 'estado']
 
     def __str__(self):
@@ -43,7 +43,7 @@ class TiposCilindros_Analisis (models.Model):
         TiposCilindros,
         limit_choices_to = {'estado': 'Activo'},
         on_delete = models.CASCADE,
-        verbose_name = 'Tipo de cilindro'
+        verbose_name = 'Tipo de ítem de ensayo'
     )
     analisis = models.ForeignKey(
         Analisis,

@@ -183,17 +183,5 @@
   "segundo_apellido": "",
   "rol": 1
  }
-},
-{
- "model": "Usuarios.usuario",
- "pk": 2,
- "fields": {
-  "tipo_documento": "CC",
-  "numero_documento": "1144556677",
-  "telefono": "3145127715",
-  "segundo_nombre": "",
-  "segundo_apellido": "",
-  "rol": 2
- }
 }
 ]

@@ -115,7 +115,7 @@ class FormCrearCliente (forms.ModelForm):
         }
 
     def clean (self):
-        form_data = super(FormCrearFases, self).clean()
+        form_data = super(FormCrearCliente, self).clean()
 
         try:
             fase = Clientes.objects.get(
